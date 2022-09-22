@@ -29,4 +29,38 @@ function ask(question, ...handlers) {
         }
     }
 }
-ask("Вопрос?", () => alert('Вы ответили да'), result => alert(result));
+//ask("Вопрос?", () => alert('Вы ответили да'), result => alert(result));
+
+//!Пользовательские свойства
+
+function sayHello() {
+    console.log("HELLO");
+    sayHello.counter++;
+}
+sayHello.counter = 0;
+for (let i = 0; i < 5; i++) {
+    sayHello();
+}
+console.log(sayHello.counter);
+
+function makeCounter() {
+    function counter() {
+        return counter.count++;
+    };
+    counter.count = 0;
+    return counter;
+}
+let counter = makeCounter();
+console.log(counter());
+console.log(counter());
+
+//NFE
+let sayNastya = function func(message) {
+    if (message) {
+        console.log('Nastya: ' + message);
+    } else {
+        func("Hello");
+    }
+};
+
+sayNastya();
