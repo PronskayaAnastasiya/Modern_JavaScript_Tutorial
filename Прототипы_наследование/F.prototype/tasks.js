@@ -56,6 +56,7 @@ function User2(name) {
     this.name = name;
 }
 User2.prototype = {};
+
 let user3 = new User2("Maks");
 let user4 = new user3.constructor("Alex");
 console.log(user4.name);
