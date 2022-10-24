@@ -51,12 +51,10 @@ if (!Function.prototype.defer2) {
         let f = this;
         return function (...args) {
             setTimeout(() => f.apply(this, args), ms);
-        }
-    };
+        };
+    }
 }
-
-function func(a, b) {
+function f2(a, b) {
     console.log(a + b);
 }
-
-func.defer2(1000)(1, 2);
+f2.defer2(1000)(1, 2);
