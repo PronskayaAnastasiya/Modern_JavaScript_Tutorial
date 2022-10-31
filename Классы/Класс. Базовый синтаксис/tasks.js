@@ -6,7 +6,7 @@ P.S. Часики тикают в консоли. Откройте её, что�
 посмотреть.
 */
 
-function Clock({ template }) {
+function ClockFunc({ template }) {
 
     let timer;
 
@@ -41,7 +41,9 @@ function Clock({ template }) {
 
 }
 
+
 class Clock {
+
     constructor({ template }) {
         this.template = template;
     }
@@ -58,7 +60,7 @@ class Clock {
         let secs = date.getSeconds();
         if (secs < 10) secs = '0' + secs;
 
-        let output = template
+        let output = this.template
             .replace('h', hours)
             .replace('m', mins)
             .replace('s', secs);
@@ -68,13 +70,15 @@ class Clock {
 
     stop() {
         clearInterval(this.timer);
-    };
+    }
 
     start() {
         this.render();
         this.timer = setInterval(() => this.render(), 1000);
     };
+};
 
-}
+
+
 let clock = new Clock({ template: 'h:m:s' });
 clock.start();

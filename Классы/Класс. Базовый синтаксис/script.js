@@ -2,69 +2,66 @@
 
 class User {
     constructor(name) {
-        this.name = name
-    };
-    sayHi() {
-        console.log(`Hi, ${this.name}`);
-    };
-}
-let user1 = new User("Иван");
-let user2 = new User();
-user1.sayHi();
-user2.sayHi();
-
-//Класс это функция
-console.log(typeof User);
-
-//..или, если точнее, это метод constructor
-console.log(User === User.prototype.constructor)
-
-//Методы находятся в User.prototype
-console.log(User.prototype.sayHi);
-
-//Методы прототипа
-console.log(Object.getOwnPropertyNames(User.prototype));
-
-
-//ВСЕ тоже самое без конструкции класс
-function User2(name) {
-    this.name = name;
-}
-console.log(User2);
-User2.prototype.sayHi = function () {
-    console.log(`Привет, ${this.name}`)
-};
-let user3 = new User2('Джон');
-user3.sayHi();
-
-//Class Expression
-let User3 = class {
-    sayHi() {
-        console.log('Hi');
-    }
-};
-
-let User4 = class MyClass {
-    sayHi() {
-        console.log(MyClass);
-    }
-};
-
-new User4().sayHi();
-
-
-class Animal {
-    constructor(name) {
         this.name = name;
     }
+
+    sayHi() {
+        console.log(this.name);
+    }
     get name() {
-        return this._name;
+        return this._name
     }
     set name(value) {
-        if (value.length < 4) {
-            console.log("Имя слишком короткое");
-            return;
-        }
         this._name = value;
     }
 }
+let tom = new User("Tom");
+tom.sayHi();
+
+console.log(typeof User);
+console.log(User === User.prototype.constructor);
+console.log(User.prototype.sayHi);
+
+
+function UserFunc(name) {
+    this.name = name;
+}
+UserFunc.prototype.sayHi = function () { console.log(this.name) };
+let Ivan = new UserFunc("Ivan");
+Ivan.sayHi();
+
+//User();
+UserFunc();
+console.log(User);
+
+
+let Flower = class MyClass {
+    constructor(options) {
+        this.name = options.name;
+        this.color = options.color;
+    }
+
+    SayName() {
+        console.log(`Flower: ${this.name}   color: ${this.color}`);
+    }
+};
+let rose = new Flower({ name: "Rose", color: "red" });
+rose.SayName();
+let astra = new Flower({ name: "Astra", color: "white" })
+astra.SayName();
+
+
+function makeClass(phrase) {
+    return class {
+        sayHi() {
+            console.log(phrase);
+        };
+    };
+}
+let Hi = makeClass("Hi");
+let By = makeClass("By");
+let hi = new Hi();
+let hi_2 = new Hi();
+hi.sayHi();
+hi_2.sayHi();
+console.log(Hi);
